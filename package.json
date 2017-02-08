@@ -7,8 +7,9 @@
   },
   "dependencies": {
     "binaryjs": "latest",
-    "express": "latest",
+    "express": "^4.14.1",
     "jade": "latest",
+    "watson-developer-cloud": "^2.17.1",
     "wav": "latest"
   },
   "author": "gabrielpoca"

@@ -50,11 +50,11 @@ binaryServer = BinaryServer({port: 9001});
 binaryServer.on('connection', function(client) {
   console.log('new connection');
 
-  //var fileWriter = new wav.FileWriter(outFile, {
-  //  channels: 1,
-  //  sampleRate: 48000,
-  //  bitDepth: 16
-  //});
+  var fileWriter = new wav.FileWriter(outFile, {
+    channels: 1,
+    sampleRate: 48000,
+    bitDepth: 16
+  });
 
   client.on('stream', function(stream, meta) {
     console.log('new stream');
@@ -72,10 +72,10 @@ binaryServer.on('connection', function(client) {
     recognizeStream.on('close', function(event) { onEvent('Close:', event); });
     recognizeStream.on('speaker_labels', function(event) { onEvent('Speaker_Labels:', event); });
 
-    //stream.pipe(fileWriter);
+    stream.pipe(fileWriter);
 
     stream.on('end', function() {
-      //fileWriter.end();
+      fileWriter.end();
       console.log('wrote to file ' + outFile);
     });
 
@@ -87,7 +87,6 @@ binaryServer.on('connection', function(client) {
 
 // Displays events on the console.
 function onEvent(name, event) {
-  console.log(name, event);
   console.log(name, JSON.stringify(event, null, 2));
 };
 
